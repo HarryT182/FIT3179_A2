@@ -1,0 +1,112 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  
+    "width": 800,
+    "height": 800,
+    "title": "Metro Station Entries in Melbourne 23-24 Financial Year",
+    "background": "skyblue",
+  
+    "layer": [
+      {
+        "data": {
+          "url": "vic_localities_topo_clipped.json",
+  
+          "format": {
+            "type": "topojson",
+            "feature": "vic_localities"
+          }
+        },
+  
+        "mark": {
+          "type": "geoshape",
+          "fill": "#b8db93",
+          "stroke": "white",
+          "strokeOpacity": 0.7,
+          "strokeWidth": 0.3
+        }
+      },
+  
+      {
+        "data": {
+          "url": "TR_RAIL_topo.json",
+  
+          "format": {
+            "type": "topojson",
+            "feature": "TR_RAIL"
+          }
+        },
+  
+        "mark": {
+          "type": "geoshape",
+          "fillOpacity": 0,
+          "stroke": "darkgray",
+          "strokeOpacity": 1,
+          "strokeWidth": 1
+        }
+      },
+  
+      {
+        "data": {
+          "url": "Annual_Metropolitan_Train_Station_Entries_2023-24_Suburb.csv"
+        },
+  
+        "mark": {
+          "type": "square",
+          "opacity": 0.8,
+          "fill": "#e03a3a",
+          "stroke": "black",
+          "strokeWidth": 1
+        },
+  
+        "encoding": {
+          "longitude": {
+            "field": "Stop_long",
+            "type": "quantitative"
+          },
+  
+          "latitude": {
+            "field": "Stop_lat",
+            "type": "quantitative"
+          },
+  
+          "size":{
+            "field": "Pax_annual",
+            "type": "quantitative",
+            "title": "Annual Station Entries"
+          },
+  
+          "tooltip": [
+            {
+              "field": "Stop_name",
+              "type": "nominal",
+              "title": "Station"
+            },
+  
+            {
+              "field": "Pax_annual",
+              "type": "quantitative",
+              "title": "Annual Entries" 
+            },
+
+            {
+              "field": "Pax_weekday",
+              "type": "quantitative",
+              "title": "Entries per Normal Weekday" 
+            },
+
+            {
+              "field": "Pax_sch_hol_weekday",
+              "type": "quantitative",
+              "title": "Entries per School Holiday" 
+            },
+
+            {
+              "field": "Suburb",
+              "type": "nominal",
+              "title": "Suburb" 
+            }
+          ]
+        }
+      }
+    ]
+  }

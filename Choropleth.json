@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "projection": {
+    "type": "mercator"
+  },
+
+  "width": 800,
+  "height": 800,
+  "title": "Total Station Entries by Suburb",
+  "background": "skyblue",
+
+  "data": {
+    "url": "vic_localities_topo_clipped.json",
+
+    "format": {
+      "type": "topojson",
+      "feature": "vic_localities"
+    }
+  },
+
+  "transform": [
+    {
+      "lookup": "properties.LOC_NAME",
+
+      "from": {
+        "data": {
+          "url": "Annual_Metropolitan_Train_Station_Entries_2023-24_Suburb.csv"
+        },
+
+        "key": "Suburb",
+        "fields": ["Pax_annual", "Pax_weekday", "Pax_sch_hol_weekday"]
+      },
+
+      "default": "-1"
+    },
+
+    {
+      "calculate": "datum['Pax_annual'] == -1 ? 0 : datum['Pax_annual']",
+      "as": "Pax_annual_text"
+    },
+
+    {
+      "calculate": "datum['Pax_annual'] - 0.1",
+      "as": "Pax_annual_log"
+    }
+  ],
+
+  "mark": {
+    "type": "geoshape",
+    "stroke": "darkgray"
+  },
+
+  "encoding": {
+
+    "color": {
+      "condition": {
+        "test": "datum['Pax_annual'] != -1",
+        "field": "Pax_annual",
+        "type": "quantitative",
+        "title": "Total station entries",
+
+        "scale": {
+          "type": "log",
+          "scheme": "reds",
+          "domain": [1e4, 1e5, 1e6, 1e7, 1e8]
+        },
+
+        "legend": {
+          "type": "gradient",
+          "format": ","
+        }
+      },
+
+      "value": "lightgrey"
+    },
+
+    "tooltip": [
+      {
+        "field": "properties.LOC_NAME",
+        "type": "nominal",
+        "title": "Suburb"
+      },
+
+      {
+        "field": "Pax_annual_text",
+        "type": "quantitative",
+        "title": "Total station entries",
+        "format": ","
+      }
+    ]
+  }
+}

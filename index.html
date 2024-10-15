@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+        <script src="vega_lite_vis.js"></script>
+
+        <link href="https://fonts.googleapis.com/css2?family=Fondamento&family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css" />
+        
+        <title>Train Stations </title>
+
+        <style>
+            body {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            p {
+                font-family: "Roboto";
+            }
+
+            #choropleth_block {
+                margin-top: 3%;
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <h1>Melbourne Metro Stations</h1>
+        <div id="psm_block", class="pure-g">
+            <div id="psm", class="pure-u-3-5"></div>
+            <div id="psm_text", class="pure-u-2-5">
+                <h2>The Train Network</h2>
+                <p>This map shows all 222 Metro railway stations in Melbourne. It shows the total number of <b>station entries</B> that occured during
+                   the <b>23-24 Financial Year</b>.</p>
+                <p>Each square is a station. Hover over a station for details, including the <b>average entries</b> per <b>normal weekday</b> and
+                   <b>school holiday</b>.</p>
+                <p><b>Flinders Street Station</b> was the most used, followed by Southern Cross, Melbourne Central and Parliment of the City Loop.</p>
+                <p><b>Major Interchange Stations</b> such as Richmond and Footscray are also among the highest.</p>
+
+                <p>Grey lines are <b>railway tracks</b>. Many tracks are not in use.</p>
+            </div>
+        </div>
+
+        <div id="choropleth_block", class="pure-g">
+            <div id="choropleth", class="pure-u-3-5"></div>
+            <div id="choropleth_text", class="pure-u-2-5">
+                <h2>Station Entries by Suburb</h2>
+                <p>This map shows the total number of station entries by <b>suburb</b> - i.e., the number of entries of any station within that suburb. 
+                    Hover over a suburb to view.</p>
+                <p>Many suburbs have no stations. These are shown in grey.</p>
+                <p>Unsurprisingly, <b>Melbourne</b> and <b>Docklands</b>, comprising the City Loop, have the most number of entries.</p>
+            </div>
+        </div>
+    </body>
+</html
