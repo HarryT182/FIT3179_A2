@@ -15,33 +15,18 @@
 
     "format": {
       "type": "topojson",
-      "feature": "vic_localities"
+      "feature": "vic_localities_geo_clipped"
     }
   },
 
   "transform": [
     {
-      "lookup": "properties.LOC_NAME",
-
-      "from": {
-        "data": {
-          "url": "Annual_Metropolitan_Train_Station_Entries_2023-24_Suburb.csv"
-        },
-
-        "key": "Suburb",
-        "fields": ["Pax_annual", "Pax_weekday", "Pax_sch_hol_weekday"]
-      },
-
-      "default": "-1"
-    },
-
-    {
-      "calculate": "datum['Pax_annual'] == -1 ? 0 : datum['Pax_annual']",
+      "calculate": "datum.properties.Pax_annual == -1 ? 0 : datum.properties.Pax_annual",
       "as": "Pax_annual_text"
     },
 
     {
-      "calculate": "datum['Pax_annual'] - 0.1",
+      "calculate": "datum.properties.Pax_annual - 0.1",
       "as": "Pax_annual_log"
     }
   ],
@@ -55,10 +40,10 @@
 
     "color": {
       "condition": {
-        "test": "datum['Pax_annual'] != -1",
-        "field": "Pax_annual",
+        "test": "datum.properties.Pax_annual != -1",
+        "field": "properties.Pax_annual",
         "type": "quantitative",
-        "title": "Total station entries",
+        "title": "Total station entries",    
 
         "scale": {
           "type": "log",

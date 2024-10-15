@@ -13,7 +13,7 @@
   
           "format": {
             "type": "topojson",
-            "feature": "vic_localities"
+            "feature": "vic_localities_geo_clipped"
           }
         },
   
@@ -89,7 +89,7 @@
             },
 
             {
-              "field": "Pax_weekday",
+              "field": "Pax_norm_weekday",
               "type": "quantitative",
               "title": "Entries per Normal Weekday" 
             },

@@ -1,0 +1,72 @@
+{
+   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ 
+   "title": "City Loop Station Entries",
+ 
+   "data": {
+     "url": "Annual_Metropolitan_Train_Station_Entries_2023-24_Suburb.csv"
+   },
+ 
+   "transform": [
+     {
+       "filter": "datum.Stop_name == 'Flinders Street' || datum.Stop_name == 'Southern Cross' || datum.Stop_name == 'Melbourne Central' || datum.Stop_name == 'Parliament' || datum.Stop_name == 'Flagstaff'"
+     },
+ 
+     {
+       "calculate": "datum.Pax_norm_weekday",
+       "as": "Normal Weekdays"
+     },
+ 
+     {
+       "calculate": "datum.Pax_sch_hol_weekday",
+       "as": "School Holidays"
+     }
+   ],
+ 
+   "repeat": {
+     "layer": ["Normal Weekdays","School Holidays"]
+   },
+ 
+   "spec": {
+     "mark": "bar",
+     "width": 600,
+     "height": 400,
+ 
+     "encoding": {
+       "x": {
+         "field": "Stop_name",
+         "type": "nominal",
+         "title": "Station"
+       },
+ 
+       "y": {
+         "field": {
+           "repeat": "layer"
+         },
+ 
+         "type": "quantitative",
+         "title": "Average Daily Entries"
+       },
+
+       "tooltip": {
+         "field": {
+            "repeat": "layer"
+         },
+
+         "title": ""
+       },
+
+       "color": {
+         "datum": {
+           "repeat": "layer"
+         }
+       },
+ 
+       "xOffset": {
+         "datum": {
+           "repeat": "layer"
+         }
+       }
+     }
+   }
+ }
